@@ -114,7 +114,7 @@ async function registerFingerprint() {
       ],
       authenticatorSelection: {
         authenticatorAttachment: "platform",
-        residentKey: "required",
+        residentKey: "discouraged",
         userVerification: "required",
       },
       timeout: 60000,
