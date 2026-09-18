@@ -6,19 +6,18 @@
   <title>我的个人主页</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body id="top">
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="index.html">我的个人主页</a>
-      <nav>
-        <a href="index.html">首页</a>
-        <a href="private.html" class="btn-ghost">个人端</a>
-      </nav>
+      <a class="brand" href="#top">我的个人主页</a>
+      <nav class="main-nav" id="main-nav"></nav>
+      <a href="private.html" class="btn-personal">个人端</a>
     </div>
   </header>
 
-  <main class="container">
-    <section class="hero">
+  <main class="container page">
+    <!-- 左侧栏：照片 + 名字 + 签名 -->
+    <aside class="sidebar">
       <div class="photo" id="photo">
         <svg viewBox="0 0 24 24" width="46" height="46" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="8" r="4"></circle>
@@ -26,19 +25,21 @@
         </svg>
         <span class="photo-hint">换成你的照片</span>
       </div>
-      <h1 id="hero-name">你的名字</h1>
-      <p class="hero-title" id="hero-title"></p>
-    </section>
+      <h1 class="side-name" id="hero-name">你的名字</h1>
+      <p class="side-title" id="hero-title"></p>
+      <p class="signature" id="signature"></p>
+    </aside>
 
-    <section class="intro-card">
-      <p id="intro"></p>
-    </section>
+    <!-- 右侧：内容 -->
+    <div class="content">
+      <section class="intro-card">
+        <p id="intro"></p>
+      </section>
 
-    <section class="quote" id="quote"></section>
+      <div id="sections"></div>
 
-    <div id="sections"></div>
-
-    <section class="section contact" id="contact"></section>
+      <section class="section contact" id="contact"></section>
+    </div>
   </main>
 
   <footer class="site-footer">

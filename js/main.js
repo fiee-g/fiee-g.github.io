@@ -118,8 +118,10 @@ function renderPublic() {
   document.getElementById("footer-brand").textContent = SITE_CONFIG.siteName;
   document.getElementById("year").textContent = new Date().getFullYear();
 
+  // 左侧栏
   document.getElementById("hero-name").textContent = PUBLIC_CONTENT.name;
   document.getElementById("hero-title").textContent = PUBLIC_CONTENT.title;
+  document.getElementById("signature").textContent = PUBLIC_CONTENT.signature || "";
   document.getElementById("intro").textContent = PUBLIC_CONTENT.intro;
 
   if (PUBLIC_CONTENT.photo) {
@@ -131,20 +133,27 @@ function renderPublic() {
     photoEl.appendChild(img);
   }
 
-  // 座右铭
-  const quoteEl = document.getElementById("quote");
-  if (PUBLIC_CONTENT.quote) {
-    quoteEl.hidden = false;
-    quoteEl.innerHTML = "<p>" + esc(PUBLIC_CONTENT.quote) + "</p>";
-  } else {
-    quoteEl.hidden = true;
-  }
-
-  // 各分区
+  // 顶部导航 + 分区
+  const navEl = document.getElementById("main-nav");
   const sectionsEl = document.getElementById("sections");
+  navEl.innerHTML = "";
   sectionsEl.innerHTML = "";
-  (PUBLIC_CONTENT.sections || []).forEach(function (section) {
+
+  const home = make("a");
+  home.href = "#top";
+  home.textContent = "首页";
+  navEl.appendChild(home);
+
+  (PUBLIC_CONTENT.sections || []).forEach(function (section, i) {
+    const id = "sec-" + i;
+
+    const navA = make("a");
+    navA.href = "#" + id;
+    navA.textContent = section.title;
+    navEl.appendChild(navA);
+
     const sec = make("section", "section");
+    sec.id = id;
     const h2 = make("h2");
     h2.textContent = section.title;
     sec.appendChild(h2);

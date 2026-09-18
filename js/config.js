@@ -8,12 +8,12 @@ const SITE_CONFIG = {
   // 站点名称（浏览器标签页标题）
   siteName: "我的个人主页",
 
-  // 私密区密码指纹（默认密码：123456）
+  // 私密区密码指纹（密码：gj020325）
   // 想换密码：F12 打开控制台，粘贴运行：
   //   crypto.subtle.digest("SHA-256", new TextEncoder().encode("你的新密码"))
   //     .then(h => console.log([...new Uint8Array(h)].map(b => b.toString(16).padStart(2, "0")).join("")))
   // 把打印出的那串字符替换到 privatePasswordHash 的引号里即可。
-  privatePasswordHash: "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+  privatePasswordHash: "1c424973c3ca00bf821a30315518f3444e8d3319271358e69ffa16f7a84df945",
 
   // 登录后免输入密码的时长（小时）
   loginDurationHours: 24,
@@ -21,20 +21,20 @@ const SITE_CONFIG = {
 
 /* ==================== 公开页内容 ==================== */
 const PUBLIC_CONTENT = {
-  // 你的名字
+  // 你的名字（显示在左侧栏）
   name: "你的名字",
 
-  // 一句话介绍自己
+  // 一句话介绍自己 / 身份标签
   title: "一句话介绍自己",
 
   // 照片：留空显示占位框；填 "images/me.jpg" 即显示照片
   photo: "",
 
-  // 自我介绍
-  intro: "这里写自我介绍，后续再补充。",
+  // 个人签名（显示在左侧栏，一句短的话）
+  signature: "（示例）个人签名 / 一句喜欢的话",
 
-  // 座右铭 / 喜欢的一句话（留空则不显示）
-  quote: "（示例）把每一件简单的事做好，就是不简单。",
+  // 自我介绍（右侧内容区顶部）
+  intro: "这里写自我介绍，后续再补充。",
 
   // 下面各分区按顺序展示，均为示例占位，直接替换文字即可
   sections: [
@@ -126,6 +126,6 @@ const PRIVATE_CONTENT = {
   todos: [
     { done: false, content: "完善公开页的自我介绍" },
     { done: false, content: "补充真实经历和作品" },
-    { done: false, content: "把默认密码 123456 换成自己的密码" },
+    { done: false, content: "补充照片和个人签名" },
   ],
 };
