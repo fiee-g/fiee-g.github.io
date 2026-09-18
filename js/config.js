@@ -124,7 +124,6 @@ const PUBLIC_CONTENT = {
 
   contact: {
     email: "gaojing020325@163.com",
-    phone: "178-1212-4819",
     links: [],
   },
 };
