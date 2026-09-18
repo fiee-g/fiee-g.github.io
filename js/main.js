@@ -178,6 +178,13 @@ function renderPublic() {
     p.innerHTML = '邮箱：<a href="mailto:' + esc(c.email) + '">' + esc(c.email) + "</a>";
     contactEl.appendChild(p);
   }
+  if (c.phone) {
+    hasContact = true;
+    const p = make("p");
+    const tel = String(c.phone).replace(/[^0-9+]/g, "");
+    p.innerHTML = '电话：<a href="tel:' + esc(tel) + '">' + esc(c.phone) + "</a>";
+    contactEl.appendChild(p);
+  }
   if (c.links && c.links.length) {
     hasContact = true;
     const ul = make("ul", "links");
