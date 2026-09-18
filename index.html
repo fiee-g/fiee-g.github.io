@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我的个人主页</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">我的个人主页</a>
+      <nav>
+        <a href="index.html">首页</a>
+        <a href="private.html" class="btn-ghost">个人端</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="photo" id="photo">
+        <svg viewBox="0 0 24 24" width="46" height="46" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="8" r="4"></circle>
+          <path d="M4 21c0-4 4-6 8-6s8 2 8 6"></path>
+        </svg>
+        <span class="photo-hint">换成你的照片</span>
+      </div>
+      <h1 id="hero-name">你的名字</h1>
+      <p class="hero-title" id="hero-title"></p>
+    </section>
+
+    <section class="intro-card">
+      <p id="intro"></p>
+    </section>
+
+    <div id="sections"></div>
+
+    <section class="section contact" id="contact"></section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> <span id="footer-brand">我的个人主页</span> · 由自己搭建</p>
+      <p class="muted small">私密内容在 <a href="private.html">个人端</a></p>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

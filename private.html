@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>个人端 · 登录</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">我的个人主页</a>
+      <nav>
+        <a href="index.html">返回首页</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container narrow">
+    <!-- 登录界面 -->
+    <section id="login-view" class="login-card">
+      <h1>个人端</h1>
+      <p class="muted">此区域仅自己可见，请输入密码。</p>
+      <form id="login-form">
+        <input type="password" id="password" placeholder="请输入密码" autocomplete="current-password" required>
+        <button type="submit" class="btn">进入</button>
+      </form>
+      <p id="login-error" class="error" hidden>密码错误，请重试。</p>
+    </section>
+
+    <!-- 私密内容 -->
+    <section id="private-view" hidden>
+      <div class="private-head">
+        <h1>🔒 我的私密空间</h1>
+        <button id="logout" class="btn-ghost">退出登录</button>
+      </div>
+      <p id="greeting" class="muted"></p>
+
+      <div class="grid">
+        <section class="panel">
+          <h2>📝 私密笔记</h2>
+          <div id="notes"></div>
+        </section>
+        <section class="panel">
+          <h2>✅ 待办事项</h2>
+          <ul id="todos" class="todo-list"></ul>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="muted small">私密区内容仅保存在此页面，请勿存放银行卡、密码等敏感信息。</p>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/private.js"></script>
+</body>
+</html>
