@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>个人端 · 登录</title>
-  <link rel="stylesheet" href="css/style.css?v=4">
+  <link rel="stylesheet" href="css/style.css?v=5">
 </head>
 <body>
   <header class="site-header">
@@ -18,12 +18,16 @@
     <!-- 登录界面 -->
     <section id="login-view" class="login-card">
       <h1>个人端</h1>
-      <p class="muted">此区域仅自己可见，请输入密码。</p>
+      <p class="muted">此区域仅自己可见，请输入密码，或使用指纹登录。</p>
       <form id="login-form">
         <input type="password" id="password" placeholder="请输入密码" autocomplete="current-password" required>
         <button type="submit" class="btn">进入</button>
       </form>
       <p id="login-error" class="error" hidden>密码错误，请重试。</p>
+
+      <div class="or-divider"><span>或</span></div>
+      <button type="button" id="fingerprint-btn" class="btn-ghost fp-btn">使用指纹登录</button>
+      <p id="fp-status" class="muted small fp-status"></p>
     </section>
 
     <!-- 私密内容 -->
@@ -54,6 +58,6 @@
   </footer>
 
   <script src="js/config.js?v=4"></script>
-  <script src="js/private.js?v=4"></script>
+  <script src="js/private.js?v=5"></script>
 </body>
 </html>
