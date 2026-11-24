@@ -64,6 +64,7 @@ a:hover { color: var(--primary-strong); }
   white-space: nowrap;
 }
 .main-nav a:hover { color: var(--text); background: var(--primary-soft); }
+.main-nav a.active { color: var(--text); background: var(--primary-soft); font-weight: 600; }
 .btn-personal {
   flex-shrink: 0;
   display: inline-block;

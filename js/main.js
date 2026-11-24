@@ -112,60 +112,30 @@ function renderItem(item) {
   return null;
 }
 
-function renderPublic() {
-  document.title = SITE_CONFIG.siteName;
-  document.querySelector(".brand").textContent = SITE_CONFIG.siteName;
-  document.getElementById("footer-brand").textContent = SITE_CONFIG.siteName;
-  document.getElementById("year").textContent = new Date().getFullYear();
+function getPageIndex() {
+  const m = location.search.match(/[?&]p=(\d+)/);
+  if (!m) return null;
+  const n = parseInt(m[1], 10);
+  return Number.isInteger(n) && n >= 1 ? n : null;
+}
 
-  // 左侧栏
-  document.getElementById("hero-name").textContent = PUBLIC_CONTENT.name;
-  document.getElementById("hero-title").textContent = PUBLIC_CONTENT.title;
-  document.getElementById("signature").textContent = PUBLIC_CONTENT.signature || "";
-  document.getElementById("intro").textContent = PUBLIC_CONTENT.intro;
-
-  if (PUBLIC_CONTENT.photo) {
-    const photoEl = document.getElementById("photo");
-    const img = document.createElement("img");
-    img.src = PUBLIC_CONTENT.photo;
-    img.alt = PUBLIC_CONTENT.name;
-    photoEl.innerHTML = "";
-    photoEl.appendChild(img);
-  }
-
-  // 顶部导航 + 分区
-  const navEl = document.getElementById("main-nav");
-  const sectionsEl = document.getElementById("sections");
-  navEl.innerHTML = "";
-  sectionsEl.innerHTML = "";
-
-  const home = make("a");
-  home.href = "#top";
-  home.textContent = "首页";
-  navEl.appendChild(home);
-
-  (PUBLIC_CONTENT.sections || []).forEach(function (section, i) {
-    const id = "sec-" + i;
-
-    const navA = make("a");
-    navA.href = "#" + id;
-    navA.textContent = section.title;
-    navEl.appendChild(navA);
-
-    const sec = make("section", "section");
-    sec.id = id;
-    const h2 = make("h2");
-    h2.textContent = section.title;
-    sec.appendChild(h2);
-    (section.items || []).forEach(function (item) {
-      const node = renderItem(item);
-      if (node) sec.appendChild(node);
-    });
-    sectionsEl.appendChild(sec);
+function buildSection(container, section, id) {
+  const sec = make("section", "section");
+  if (id) sec.id = id;
+  const h2 = make("h2");
+  h2.textContent = section.title;
+  sec.appendChild(h2);
+  (section.items || []).forEach(function (item) {
+    const node = renderItem(item);
+    if (node) sec.appendChild(node);
   });
+  container.appendChild(sec);
+  return sec;
+}
 
-  // 联系方式
+function renderContact() {
   const contactEl = document.getElementById("contact");
+  contactEl.innerHTML = "";
   const c = PUBLIC_CONTENT.contact || {};
   const ch2 = make("h2");
   ch2.textContent = "联系方式";
@@ -201,6 +171,87 @@ function renderPublic() {
     p.textContent = "（待补充）联系方式";
     contactEl.appendChild(p);
   }
+}
+
+function setupScrollSpy(navEl, sectionsEl) {
+  const navLinks = Array.prototype.slice.call(navEl.children);
+  const sectionEls = Array.prototype.slice.call(sectionsEl.children);
+  function setActive() {
+    const threshold = 100;
+    const y = window.scrollY + threshold;
+    let activeIndex = 0;
+    sectionEls.forEach(function (el, i) {
+      if (el.offsetTop <= y) activeIndex = i + 1;
+    });
+    navLinks.forEach(function (a, i) {
+      a.classList.toggle("active", i === activeIndex);
+    });
+  }
+  window.addEventListener("scroll", setActive);
+  setActive();
+}
+
+function renderPublic() {
+  document.title = SITE_CONFIG.siteName;
+  document.querySelector(".brand").textContent = SITE_CONFIG.siteName;
+  document.getElementById("footer-brand").textContent = SITE_CONFIG.siteName;
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // 左侧栏
+  document.getElementById("hero-name").textContent = PUBLIC_CONTENT.name;
+  document.getElementById("hero-title").textContent = PUBLIC_CONTENT.title;
+  document.getElementById("signature").textContent = PUBLIC_CONTENT.signature || "";
+  document.getElementById("intro").textContent = PUBLIC_CONTENT.intro;
+
+  if (PUBLIC_CONTENT.photo) {
+    const photoEl = document.getElementById("photo");
+    const img = document.createElement("img");
+    img.src = PUBLIC_CONTENT.photo;
+    img.alt = PUBLIC_CONTENT.name;
+    photoEl.innerHTML = "";
+    photoEl.appendChild(img);
+  }
+
+  const sections = PUBLIC_CONTENT.sections || [];
+  const pageIndex = getPageIndex(); // 1-based
+  const single = pageIndex && pageIndex <= sections.length ? pageIndex : null;
+
+  // 顶部导航（递增分页链接）
+  const navEl = document.getElementById("main-nav");
+  navEl.innerHTML = "";
+
+  const home = make("a");
+  home.href = "index.html";
+  home.textContent = "首页";
+  navEl.appendChild(home);
+
+  sections.forEach(function (section, i) {
+    const navA = make("a");
+    navA.href = "index.html?p=" + (i + 1);
+    navA.textContent = section.title;
+    navEl.appendChild(navA);
+  });
+
+  // 内容区
+  const sectionsEl = document.getElementById("sections");
+  sectionsEl.innerHTML = "";
+
+  // 单模块页隐藏顶部介绍卡片，首页保留
+  const introCard = document.querySelector(".intro-card");
+  if (introCard) introCard.style.display = single ? "none" : "";
+
+  if (single) {
+    document.title = sections[single - 1].title + " · " + SITE_CONFIG.siteName;
+    buildSection(sectionsEl, sections[single - 1]);
+    navEl.children[single].classList.add("active");
+  } else {
+    sections.forEach(function (section, i) {
+      buildSection(sectionsEl, section, "sec-" + i);
+    });
+    setupScrollSpy(navEl, sectionsEl);
+  }
+
+  renderContact();
 }
 
 renderPublic();
