@@ -119,9 +119,10 @@ function getPageIndex() {
   return Number.isInteger(n) && n >= 1 ? n : null;
 }
 
-function buildSection(container, section, id) {
+function buildSection(container, section, id, navIndex) {
   const sec = make("section", "section");
   if (id) sec.id = id;
+  if (navIndex != null) sec.setAttribute("data-nav-index", navIndex);
   const h2 = make("h2");
   h2.textContent = section.title;
   sec.appendChild(h2);
@@ -180,8 +181,9 @@ function setupScrollSpy(navEl, sectionsEl) {
     const threshold = 100;
     const y = window.scrollY + threshold;
     let activeIndex = 0;
-    sectionEls.forEach(function (el, i) {
-      if (el.offsetTop <= y) activeIndex = i + 1;
+    sectionEls.forEach(function (el) {
+      const idx = Number(el.getAttribute("data-nav-index"));
+      if (!Number.isNaN(idx) && el.offsetTop <= y) activeIndex = idx;
     });
     navLinks.forEach(function (a, i) {
       a.classList.toggle("active", i === activeIndex);
@@ -246,7 +248,8 @@ function renderPublic() {
     navEl.children[single].classList.add("active");
   } else {
     sections.forEach(function (section, i) {
-      buildSection(sectionsEl, section, "sec-" + i);
+      if (section.hideOnHome) return;
+      buildSection(sectionsEl, section, "sec-" + i, i + 1);
     });
     setupScrollSpy(navEl, sectionsEl);
   }

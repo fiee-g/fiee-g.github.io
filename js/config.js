@@ -63,6 +63,7 @@ const PUBLIC_CONTENT = {
     },
     {
       title: "上岸信息",
+      hideOnHome: true,
       items: [
         {
           type: "text",
