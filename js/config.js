@@ -62,6 +62,15 @@ const PUBLIC_CONTENT = {
       ],
     },
     {
+      title: "上岸信息",
+      items: [
+        {
+          type: "text",
+          content: "考公上岸信息搜集与整理（内容待补充，想好后在这里更新）。",
+        },
+      ],
+    },
+    {
       title: "教育经历",
       items: [
         {
